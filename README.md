@@ -60,8 +60,9 @@ Streamlit (for deployment)
     🤖 Models
 
 The project will compare regression algorithms such as:
-
-
+Decision tree regressor
+Support vector regressor
+Linear regressor
 
 
 📈 Evaluation Metrics
