@@ -38,26 +38,26 @@ Joblib
 Streamlit (for deployment)
 
 🔍 Project Workflow
-Dataset
-   ↓
-Data Cleaning
-   ↓
-EDA & Visualization
-   ↓
-Preprocessing
-   ↓
-Train-Test Split
-   ↓
-Feature Encoding / Scaling
-   ↓
-ML Regression Models
-   ↓
-Model Evaluation
-   ↓
-Best Model Selection
-   ↓
-Streamlit UI
-🤖 Models
+   Dataset
+      ↓
+   Data Cleaning
+      ↓
+   EDA & Visualization
+      ↓
+   Preprocessing
+      ↓
+   Train-Test Split
+      ↓
+   Feature Encoding / Scaling
+      ↓
+   ML Regression Models
+      ↓
+   Model Evaluation
+      ↓
+   Best Model Selection
+      ↓
+   Streamlit UI
+    🤖 Models
 
 The project will compare regression algorithms such as:
 
