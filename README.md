@@ -1,4 +1,5 @@
 This repo consit of ML operations like data preprocessing , cleaning of insurance dataset.
+Also i have tried to hard code few ml functions like estimating value using weights or my theoritical knowledge.
 
 First I have loaded the dataset , got an idea about how is it using operations like mean,max,median , then peformed cleaning and analysing the data and then finally applied ML model and identified its accuracy.
 
