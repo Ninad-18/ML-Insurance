@@ -86,22 +86,16 @@ Preparing data for regression models
 
 Note: Feature scaling is particularly important for algorithms such as SVR, Ridge, Lasso, ElasticNet and SGD.
 
-📂 Project Structure
+📂 intended  Project Structure
 Medical-Cost-Insurance/
 │
 ├── data/
 │   └── insurance.csv
-│
-├── notebooks/
-│   └── medical_cost_analysis.ipynb
-│
-├── models/
-│   └── best_model.joblib
-│
 ├── app.py
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+
 🖥️ Streamlit Application
 
 A Streamlit interface can be used to make predictions using the trained model.
@@ -119,6 +113,8 @@ and returns the predicted medical insurance charges.
 
 Run the application
 streamlit run app.py
+
+
 🛠️ Technologies Used
 Python
 Pandas
@@ -143,5 +139,4 @@ Build a prediction application using Streamlit
 This project is created for educational and machine learning practice purposes. The predictions should not be considered actual insurance quotes, medical advice, or financial advice.
 
 👨‍💻 Author
-
 Ninad Patil
