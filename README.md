@@ -86,15 +86,16 @@ Preparing data for regression models
 
 Note: Feature scaling is particularly important for algorithms such as SVR, Ridge, Lasso, ElasticNet and SGD.
 
-📂 intended  Project Structure
+📂 intended Project Structure
 Medical-Cost-Insurance/
 │
 ├── data/
 │   └── insurance.csv
-├── app.py
-├── requirements.txt
+├── .env
+├── LICENSE
 ├── .gitignore
 └── README.md
+|__
 
 🖥️ Streamlit Application
 
