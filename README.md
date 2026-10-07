@@ -94,8 +94,10 @@ Medical-Cost-Insurance/
 ├── .env
 ├── LICENSE
 ├── .gitignore
+├── 
+├── 
 └── README.md
-|__
+
 
 🖥️ Streamlit Application
 
