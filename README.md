@@ -1,145 +1,89 @@
-Medical Cost Insurance Prediction
+# Medical Cost Insurance Prediction — React + Flask
 
-A machine learning project that predicts medical insurance charges based on personal and demographic information such as age, BMI, number of children, smoking status, gender, and region.
+Full-stack starter for predicting insurance charges with a Python regression model.
 
-📌 Objective
+## Stack
+- React + Vite frontend
+- Flask REST API
+- scikit-learn + Joblib model
+- Features: `age`, `sex`, `bmi`, `children`, `smoker`, `region`
+- Target: `charges`
 
-The objective of this project is to build and compare multiple regression machine learning models and identify the model that performs best at predicting medical insurance costs.
+## Critical model requirement
+The backend expects `backend/models/best_model.joblib` to be a fitted scikit-learn **Pipeline** that accepts a DataFrame containing the six raw columns listed above. The pipeline should contain the same preprocessing and estimator used during training. A model trained on an already-encoded matrix will not accept raw categorical strings directly.
 
-📊 Dataset
+Example pattern for your notebook (replace `best_regressor` with your selected model; use your existing train/test split for final evaluation):
 
-The project uses the Medical Cost Personal Dataset.
+```python
+from pathlib import Path
+import joblib
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.ensemble import RandomForestRegressor
 
-Features
-Feature	Description
-age	Age of the individual
-sex	Gender
-bmi	Body Mass Index
-children	Number of dependent children
-smoker	Smoking status
-region	Residential region
-charges	Medical insurance cost — target variable
-🔄 Machine Learning Workflow
-Dataset
-   ↓
-Data Cleaning
-   ↓
-Exploratory Data Analysis
-   ↓
-Feature Selection
-   ↓
-Categorical Encoding
-   ↓
-Train-Test Split
-   ↓
-Feature Scaling
-   ↓
-Model Training
-   ↓
-Model Evaluation
-   ↓
-Model Comparison
-   ↓
-Best Model
-   ↓
-Prediction
-🤖 Models Used
+numeric = ["age", "bmi", "children"]
+categorical = ["sex", "smoker", "region"]
 
-The following regression algorithms are implemented and compared:
+preprocessor = ColumnTransformer([
+    ("numeric", Pipeline([
+        ("imputer", SimpleImputer(strategy="median")),
+        ("scaler", StandardScaler()),
+    ]), numeric),
+    ("categorical", Pipeline([
+        ("imputer", SimpleImputer(strategy="most_frequent")),
+        ("encoder", OneHotEncoder(handle_unknown="ignore")),
+    ]), categorical),
+])
 
-Linear Regression
-Lasso Regression
-Ridge Regression
-ElasticNet Regression
-Decision Tree Regressor
-Random Forest Regressor
-Extra Trees Regressor
-Support Vector Regressor (SVR)
-AdaBoost Regressor
-Gradient Boosting Regressor
-XGBoost Regressor
-CatBoost Regressor
-SGD Regressor
-📈 Evaluation Metrics
+best_regressor = RandomForestRegressor(random_state=42)  # replace with chosen estimator
+pipeline = Pipeline([
+    ("preprocessor", preprocessor),
+    ("regressor", best_regressor),
+])
 
-The models are evaluated using:
+X = df[["age", "sex", "bmi", "children", "smoker", "region"]]
+y = df["charges"]
+pipeline.fit(X_train_raw, y_train)  # X_train_raw must contain the six unencoded columns
+Path("backend/models").mkdir(parents=True, exist_ok=True)
+joblib.dump(pipeline, "backend/models/best_model.joblib")
+```
 
-MAE (Mean Absolute Error) — average absolute prediction error
-MSE (Mean Squared Error) — average squared prediction error
-RMSE (Root Mean Squared Error) — square root of MSE
-R² Score — measures how well the model explains the variation in insurance charges
+Make sure `X_train_raw` is the raw-column training split and that your `y_train` is the matching target split.
 
-For MAE, MSE and RMSE, lower is better.
+## Run backend (PowerShell)
 
-For R², higher is better.
+```powershell
+cd backend
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python app.py
+```
 
-🧹 Preprocessing
+Health check: `http://127.0.0.1:5000/api/health`
 
-The preprocessing includes:
+## Run frontend (second terminal)
 
-Checking for missing values
-Checking duplicate records
-Encoding categorical features
-Splitting data into training and testing sets
-Feature scaling where required
-Preparing data for regression models
+```powershell
+cd frontend
+npm install
+npm run dev
+```
 
-Note: Feature scaling is particularly important for algorithms such as SVR, Ridge, Lasso, ElasticNet and SGD.
+Open the Vite URL shown in terminal, usually `http://localhost:5173`.
 
-📂 Intended Project Structure
-Medical-Cost-Insurance/
-│
-├── data/
-│   └── insurance.csv
-├── .env
-├── LICENSE
-├── .gitignore
-├── models.ipynb
-├── Linear_regression.ipynb
-└── README.md
+Optional `frontend/.env`:
 
+```text
+VITE_API_URL=http://127.0.0.1:5000
+```
 
-🖥️ Streamlit Application
+Restart Vite after editing `.env`.
 
-A Streamlit interface can be used to make predictions using the trained model.
-
-The application accepts:
-
-Age
-Gender
-BMI
-Number of Children
-Smoking Status
-Region
-
-and returns the predicted medical insurance charges.
-
-Run the application
-streamlit run app.py
-
-
-🛠️ Technologies Used
-Python
-Pandas
-NumPy
-Matplotlib
-Seaborn
-Scikit-learn
-XGBoost
-CatBoost
-Jupyter Notebook
-Joblib
-Streamlit
-🎯 Project Goals
-Understand medical insurance cost data
-Perform EDA and preprocessing
-Apply multiple regression algorithms
-Compare model performance
-Select an appropriate regression model
-Build a prediction application using Streamlit
-⚠️ Disclaimer
-
-This project is created for educational and machine learning practice purposes. The predictions should not be considered actual insurance quotes, medical advice, or financial advice.
-
-👨‍💻 Author
-Ninad Patil
+## Notes
+- The trained `best_model.joblib` is not included; generate it from your notebook.
+- CORS is enabled for local development; restrict origins in production.
+- Keep scikit-learn versions compatible between model training and inference.
+- Educational estimate only, not an actual insurance quote or medical/financial advice.
