@@ -77,7 +77,7 @@ Open the Vite URL shown in terminal, usually `http://localhost:5173`.
 Optional `frontend/.env`:
 
 ```text
-VITE_API_URL=http://127.0.0.1:5000
+VITE_API_URL = http://127.0.0.1:5000
 ```
 
 Restart Vite after editing `.env`.
