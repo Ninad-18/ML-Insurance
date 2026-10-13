@@ -1,5 +1,6 @@
 from pathlib import Path
 import joblib
+
 import pandas as pd
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -57,4 +58,5 @@ def predict():
     return jsonify({"predicted_charges": round(prediction, 2)})
 
 if __name__ == "__main__":
+    
     app.run(host="127.0.0.1", port=5000, debug=True)
