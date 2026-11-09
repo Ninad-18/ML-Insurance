@@ -1,4 +1,4 @@
-# Medical Cost Insurance Prediction — React + Flask
+# Medical Cost Insurance Prediction 
 
 Full-stack starter for predicting insurance charges with a Python regression model.
 
